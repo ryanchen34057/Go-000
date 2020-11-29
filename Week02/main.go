@@ -1,9 +1,9 @@
 package main
 
 import (
-	"homework/week02/getting"
-	"homework/week02/storage"
-	"homework/week02/users"
+	"Go-000/Week02/getting"
+	"Go-000/Week02/storage"
+	"Go-000/Week02/users"
 	"net/http"
 )
 

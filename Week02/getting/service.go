@@ -1,10 +1,7 @@
 package getting
 
 import (
-	"database/sql"
-	"homework/week02/users"
-
-	"github.com/pkg/errors"
+	"Go-000/Week02/users"
 )
 
 type Service interface {
@@ -20,9 +17,5 @@ func NewService(uR users.Repository) Service {
 }
 
 func (s *service) GetUser(id string) (users.User, error) {
-	user, err := s.uR.Get(id)
-	if errors.Is(err, sql.ErrNoRows) {
-		return user, errors.Wrap(err, "User not found")
-	}
-	return user, nil
+	return s.uR.Get(id)
 }

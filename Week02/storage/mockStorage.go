@@ -1,8 +1,10 @@
 package storage
 
 import (
+	"Go-000/Week02/users"
 	"database/sql"
-	"homework/week02/users"
+
+	"github.com/pkg/errors"
 )
 
 type MockUserStorage struct {
@@ -15,5 +17,12 @@ func NewMockUserStorage() *MockUserStorage {
 
 func (us *MockUserStorage) Get(id string) (users.User, error) {
 	var user users.User
-	return user, sql.ErrNoRows
+	if user, err := getFromDB(id); errors.Is(err, sql.ErrNoRows) {
+		return user, errors.Wrapf(err, "User not found")
+	}
+	return user, nil
+}
+
+func getFromDB(id string) (users.User, error) {
+	return users.User{}, sql.ErrNoRows
 }
